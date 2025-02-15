@@ -1,0 +1,130 @@
+<div class="min-h-screen bg-gray-50">
+  <%# Hero Section with Background Image %>
+  <div class="relative">
+    <%# Background image with overlay %>
+    <div class="absolute inset-0">
+      <%= image_tag "bookRent.jpg", 
+          class: "h-full w-full object-cover",
+          alt: "Library background" %>
+      <div class="absolute inset-0 bg-gradient-to-r from-indigo-600 to-indigo-800 mix-blend-multiply opacity-90"></div>
+    </div>
+
+    <%# Hero content %>
+    <div class="relative py-16 px-4 sm:px-6 lg:px-8">
+      <h1 class="text-center text-3xl font-bold tracking-tight text-white sm:text-4xl lg:text-5xl">
+        BOOK RENT
+      </h1>
+      <p class="mx-auto mt-4 max-w-xl text-center text-lg text-indigo-100">
+        Unlimited books on shelves. Rent your next read today.
+      </p>
+      
+      <%# Search Bar %>
+      <div class="mx-auto mt-8 max-w-xl">
+        <%= form_with url: books_path, method: :get, class: "relative" do |f| %>
+          <div class="relative">
+            <%= f.text_field :query, 
+                placeholder: "Search for books by title, author, or ISBN...",
+                class: "block w-full rounded-lg border-0 px-4 py-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600" %>
+            <button type="submit" class="absolute inset-y-0 right-0 flex items-center pr-4">
+              <svg class="h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M9 3.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2 9a7 7 0 1112.452 4.391l3.328 3.329a.75.75 0 11-1.06 1.06l-3.329-3.328A7 7 0 012 9z" clip-rule="evenodd" />
+              </svg>
+            </button>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <%# Quick Actions %>
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div class="relative -mt-8">
+      <div class="mx-auto max-w-4xl">
+        <div class="rounded-lg bg-white shadow">
+          <div class="grid grid-cols-2 gap-4 p-4 sm:grid-cols-4">
+            <%= link_to books_path, class: "flex flex-col items-center p-4 text-center hover:bg-gray-50 rounded-lg" do %>
+              <div class="rounded-lg bg-indigo-100 p-3">
+                <svg class="h-6 w-6 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                </svg>
+              </div>
+              <span class="mt-2 text-sm font-medium text-gray-900">All Books</span>
+            <% end %>
+
+            <%= link_to borrowings_path, class: "flex flex-col items-center p-4 text-center hover:bg-gray-50 rounded-lg" do %>
+              <div class="rounded-lg bg-indigo-100 p-3">
+                <svg class="h-6 w-6 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+              <span class="mt-2 text-sm font-medium text-gray-900">My Borrowings</span>
+            <% end %>
+
+            <div class="flex flex-col items-center p-4 text-center">
+              <div class="rounded-lg bg-indigo-100 p-3">
+                <svg class="h-6 w-6 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                </svg>
+              </div>
+              <span class="mt-2 text-sm font-medium text-gray-900">Reading History</span>
+            </div>
+
+            <div class="flex flex-col items-center p-4 text-center">
+              <div class="rounded-lg bg-indigo-100 p-3">
+                <svg class="h-6 w-6 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+              <span class="mt-2 text-sm font-medium text-gray-900">Help</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <%# Available Books Section %>
+    <div class="mt-12">
+      <div class="flex items-center justify-between">
+        <h2 class="text-2xl font-bold tracking-tight text-gray-900">Available Books</h2>
+        <p class="text-sm text-gray-500">Over <%= Book.count %> books in our collection</p>
+      </div>
+
+      <div class="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <% @books.each do |book| %>
+          <div class="group relative rounded-lg border border-gray-200 bg-white p-6 shadow-sm hover:shadow-md transition-shadow duration-200">
+            <div class="aspect-h-1 aspect-w-1 w-full overflow-hidden bg-gray-100 rounded-lg">
+              <% if book.cover_url.present? %>
+                <%= image_tag book.cover_url, class: "h-full w-full object-cover object-center" %>
+              <% else %>
+                <div class="flex h-full items-center justify-center">
+                  <svg class="h-12 w-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                  </svg>
+                </div>
+              <% end %>
+            </div>
+
+            <div class="mt-4">
+              <h3 class="text-lg font-medium text-gray-900">
+                <%= link_to book.title, book_path(book), class: "hover:text-indigo-600" %>
+              </h3>
+              <p class="mt-1 text-sm text-gray-500">by <%= book.author %></p>
+              
+              <div class="mt-4 flex items-center justify-between">
+                <span class="text-sm text-gray-500">ISBN: <%= book.isbn %></span>
+                <% if book.available? %>
+                  <span class="inline-flex items-center rounded-full bg-green-100 px-2.5 py-0.5 text-xs font-medium text-green-800">
+                    Available
+                  </span>
+                <% else %>
+                  <span class="inline-flex items-center rounded-full bg-red-100 px-2.5 py-0.5 text-xs font-medium text-red-800">
+                    Borrowed
+                  </span>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

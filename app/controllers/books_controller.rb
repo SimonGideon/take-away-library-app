@@ -1,4 +1,5 @@
 class BooksController < ApplicationController
+    allow_unauthenticated_access only: %i[ index]
     before_action :set_book, only: [:show, :borrow]
     before_action :authenticate!, except: [:index, :show]
   

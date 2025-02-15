@@ -12,6 +12,10 @@ Rails.application.configure do
   # Full error reports are disabled.
   config.consider_all_requests_local = false
 
+  config.assets.image_variations = {
+  hero: { resize_to_fill: [2000, 600] }
+}
+
   # Turn on fragment caching in view templates.
   config.action_controller.perform_caching = true
 
