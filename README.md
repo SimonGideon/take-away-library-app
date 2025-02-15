@@ -1,24 +1,46 @@
-# README
+# Book Rental Library App
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+A simple book rental system built with Ruby on Rails 8, where users can browse and borrow books.
 
-Things you may want to cover:
+## Requirements
 
-* Ruby version
+- Ruby 3.3.5
+- Rails 8.0.1
+- PostgreSQL
 
-* System dependencies
+## Setup
 
-* Configuration
+1. Clone the repository
+```bash
+[git clone https://github.com/yourusername/library_app.git](https://github.com/SimonGideon/take-away-library-app.git)
+cd take-away-library-app
+```
 
-* Database creation
+2. Install dependencies
+```bash
+bundle install
+```
 
-* Database initialization
+3. Database setup
+```bash
+# Create and migrate database
+rails db:create
+rails db:migrate
 
-* How to run the test suite
+# Load sample books
+rails db:seed
+```
 
-* Services (job queues, cache servers, search engines, etc.)
+4. Start the server
+```bash
+./bin/dev
+```
 
-* Deployment instructions
+Visit `http://localhost:3000` in your browser.
 
-* ...
+## Features
+- User authentication
+- Browse available books
+- Borrow and return books
+- Track borrowed books
+- Book availability status
