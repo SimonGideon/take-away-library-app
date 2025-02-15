@@ -21,7 +21,7 @@ Rails.application.routes.draw do
       end
     end
   
-    resources :borrowings, only: [:index] do
+    resources :borrowings, only: [:index, :create] do
       member do
         patch :return
       end
