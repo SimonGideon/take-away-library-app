@@ -15,6 +15,18 @@ Rails.application.routes.draw do
     get  "password/reset/edit", to: "passwords#edit"
     patch "password/reset/edit", to: "passwords#update"
 
+    resources :books do
+      member do
+        post :borrow
+      end
+    end
+  
+    resources :borrowings, only: [:index] do
+      member do
+        patch :return
+      end
+    end
+
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
