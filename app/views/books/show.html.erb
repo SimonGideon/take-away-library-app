@@ -1,0 +1,187 @@
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+  <div class="lg:grid lg:grid-cols-2 lg:gap-x-8 lg:items-start">
+    <div class="flex flex-col">
+      <div class="mb-6">
+        <%= link_to books_path, class: "inline-flex items-center text-sm text-gray-500 hover:text-gray-700" do %>
+          <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+          </svg>
+          Back to Books
+        <% end %>
+      </div>
+
+      <div class="max-w-sm mx-auto">
+  <div class="aspect-w-3 aspect-h-4 rounded-lg bg-gray-100 overflow-hidden">
+      <% if @book.cover_url.present? %>
+        <%= image_tag @book.cover_url, 
+            class: "object-cover object-center w-full h-full",
+            alt: @book.title %>
+      <% else %>
+        <div class="flex items-center justify-center h-full">
+          <svg class="h-24 w-24 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+          </svg>
+        </div>
+      <% end %>
+    </div>
+    </div>
+
+
+      <div class="mt-4 lg:hidden">
+        <% if @book.available? %>
+          <div class="rounded-md bg-green-50 p-4">
+            <div class="flex">
+              <div class="flex-shrink-0">
+                <svg class="h-5 w-5 text-green-400" viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                </svg>
+              </div>
+              <div class="ml-3">
+                <p class="text-sm font-medium text-green-800">Available for borrowing</p>
+              </div>
+            </div>
+          </div>
+        <% else %>
+          <div class="rounded-md bg-yellow-50 p-4">
+            <div class="flex">
+              <div class="flex-shrink-0">
+                <svg class="h-5 w-5 text-yellow-400" viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd" />
+                </svg>
+              </div>
+              <div class="ml-3">
+                <p class="text-sm font-medium text-yellow-800">
+                  Currently borrowed
+                  <% if @current_borrowing %>
+                    (Due: <%= @current_borrowing.due_date.strftime("%B %d, %Y") %>)
+                  <% end %>
+                </p>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="mt-10 px-4 sm:px-0 lg:mt-0">
+      <h1 class="text-3xl font-bold tracking-tight text-gray-900"><%= @book.title %></h1>
+      <div class="mt-3">
+        <h2 class="sr-only">Book information</h2>
+        <p class="text-xl text-gray-900">by <%= @book.author %></p>
+      </div>
+
+      <div class="mt-6">
+        <h2 class="text-sm font-medium text-gray-900">Details</h2>
+
+        <div class="mt-4 space-y-6">
+          <div class="flex items-center">
+            <dt class="text-sm font-medium text-gray-500">ISBN:</dt>
+            <dd class="ml-2 text-sm text-gray-900"><%= @book.isbn %></dd>
+          </div>
+
+          <div class="hidden lg:block">
+            <% if @book.available? %>
+              <div class="rounded-md bg-green-50 p-4">
+                <div class="flex">
+                  <div class="flex-shrink-0">
+                    <svg class="h-5 w-5 text-green-400" viewBox="0 0 20 20" fill="currentColor">
+                      <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                    </svg>
+                  </div>
+                  <div class="ml-3">
+                    <p class="text-sm font-medium text-green-800">Available for borrowing</p>
+                  </div>
+                </div>
+              </div>
+            <% else %>
+              <div class="rounded-md bg-yellow-50 p-4">
+                <div class="flex">
+                  <div class="flex-shrink-0">
+                    <svg class="h-5 w-5 text-yellow-400" viewBox="0 0 20 20" fill="currentColor">
+                      <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd" />
+                    </svg>
+                  </div>
+                  <div class="ml-3">
+                    <p class="text-sm font-medium text-yellow-800">
+                      Currently borrowed
+                      <% if @current_borrowing %>
+                        (Due: <%= @current_borrowing.due_date.strftime("%B %d, %Y") %>)
+                      <% end %>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-10 flex flex-col space-y-4">
+        <% if Current.user %>
+          <% if @book.available? %>
+            <%= button_to borrow_book_path(@book), 
+                method: :post,
+                class: "flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2" do %>
+              Borrow Book
+            <% end %>
+          <% elsif @is_borrowed_by_current_user %>
+            <%= button_to return_borrowing_path(@current_borrowing), 
+                method: :patch,
+                class: "flex w-full items-center justify-center rounded-md border border-transparent bg-green-600 px-8 py-3 text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2" do %>
+              Return Book
+            <% end %>
+          <% end %>
+        <% else %>
+          <%= link_to new_session_path, 
+              class: "flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2" do %>
+            Sign in to Borrow
+          <% end %>
+        <% end %>
+      </div>
+      <div class="mt-12">
+  <h2 class="text-lg font-medium text-gray-900">Similar Books</h2>
+  
+  <div data-controller="scroll" class="relative mt-4">
+  <!-- Scroll Left Button -->
+  <button data-action="click->scroll#scrollLeft" class="absolute left-0 top-1/2 -translate-y-1/2 -ml-4 z-10 bg-white rounded-full shadow-lg p-2 hover:bg-gray-50">
+    <svg class="h-6 w-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+    </svg>
+  </button>
+
+  <div data-scroll-target="container" class="flex space-x-4 overflow-x-auto scroll-smooth scrollbar-hide py-4 px-4">
+    <% Book.where.not(id: @book.id).limit(10).each do |book| %>
+      <div class="flex-none w-36">
+        <div class="relative aspect-w-2 aspect-h-3 rounded-lg bg-gray-100 overflow-hidden">
+          <% if book.cover_url.present? %>
+            <%= image_tag book.cover_url, 
+                class: "object-cover object-center w-full h-full",
+                alt: book.title %>
+          <% else %>
+            <div class="flex items-center justify-center h-full">
+              <svg class="h-8 w-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+              </svg>
+            </div>
+          <% end %>
+        </div>
+        <div class="mt-2">
+          <%= link_to book_path(book), class: "block" do %>
+            <h3 class="text-sm font-medium text-gray-900 truncate"><%= book.title %></h3>
+            <p class="text-xs text-gray-500 truncate"><%= book.author %></p>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <button data-action="click->scroll#scrollRight" class="absolute right-0 top-1/2 -translate-y-1/2 -mr-4 z-10 bg-white rounded-full shadow-lg p-2 hover:bg-gray-50">
+    <svg class="h-6 w-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+    </svg>
+  </button>
+</div>
+
+</div>
+    </div>
+  </div>
+</div>

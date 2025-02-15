@@ -1,13 +1,16 @@
 class BooksController < ApplicationController
-    allow_unauthenticated_access only: %i[ index]
+    # allow_unauthenticated_access only: %i[index]
     before_action :set_book, only: [:show, :borrow]
-    before_action :authenticate!, except: [:index, :show]
   
     def index
       @books = Book.all.order(:title)
     end
   
     def show
+      @book = Book.find(params[:id])
+      @current_borrowing = @book.current_borrowing
+      @is_borrowed_by_current_user = @current_borrowing&.user == Current.user
+      @similar_books = @book.similar_books(limit: 10)
     end
   
     def new
@@ -23,7 +26,7 @@ class BooksController < ApplicationController
         render :new, status: :unprocessable_entity
       end
     end
-  
+
     def borrow
       borrowing = Current.user.borrowings.build(book: @book)
   

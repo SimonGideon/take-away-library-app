@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   get  "sign_up", to: "registrations#new"
   post "sign_up", to: "registrations#create"
   delete "sign_out", to: "sessions#destroy"
-
+  get "home", to: "home#index"
     # Password reset routes
     get  "password/reset", to: "passwords#new"
     post "password/reset", to: "passwords#create"
@@ -39,5 +39,5 @@ Rails.application.routes.draw do
   # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
 
   # Defines the root path route ("/")
- root "home#index"
+ root "books#index"
 end

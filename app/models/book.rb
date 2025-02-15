@@ -25,4 +25,10 @@ class Book < ApplicationRecord
     def current_borrower
       current_borrowing&.user
     end
+
+    def similar_books(limit: 10)
+      Book.where.not(id: self.id)
+          .order("RANDOM()")
+          .limit(limit)
+    end
   end
