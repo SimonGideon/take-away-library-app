@@ -36,6 +36,11 @@ rails db:seed
 ./bin/dev
 ```
 
+5. Run Test
+   ```
+    bundle exec rspec
+   ```
+
 Visit `http://localhost:3000` in your browser.
 
 ## Features
