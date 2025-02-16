@@ -12,8 +12,8 @@ A simple book rental system built with Ruby on Rails 8, where users can browse a
 
 1. Clone the repository
 ```bash
-[git clone https://github.com/yourusername/library_app.git](https://github.com/SimonGideon/take-away-library-app.git)
-cd take-away-library-app
+https://github.com/SimonGideon/library-app.git
+cd library-app
 ```
 
 2. Install dependencies
